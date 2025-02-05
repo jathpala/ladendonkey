@@ -9,6 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.1.1"
+    "@shikijs/transformers": "^2.3.0",
+    "astro": "^5.1.1",
+    "lodash": "^4.17.21",
+    "sass": "^1.83.0",
+    "title-case": "^4.3.2"
   }
 }

@@ -1,11 +1,94 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "$/layouts/Main.astro"
+import Post from "$/components/Post.astro"
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import { getCollection, render } from "astro:content"
+
+// Get a sorted list of blog posts
+const posts = (await getCollection("blog", ({ data }) => {
+    // Filter out posts that don't have a created date
+    // (i.e are not yet published)
+    return data.created !== null
+})).sort(
+    // Sort by publication date
+    (a, b) => {
+        // Use the updated date if it exists, otherwise created date
+        const dateA = a.data.updated || a.data.created
+        const dateB = b.data.updated || b.data.created
+
+        return dateB.getTime() - dateA.getTime()
+    }
+)
 ---
 
 <Layout>
-	<Welcome />
+
+    <main>
+        <!-- Show the most recent post -->
+        <article>
+            <Post post={posts[0]} />
+        </article>
+
+        <aside>
+            <div class="section">
+                <h1>About</h1>
+                <p>Just a small collection of software and web development tips and tricks I've picked up over the years. Hopefully you find something here useful.</p>
+            </div>
+        </aside>
+    </main>
+
 </Layout>
+
+<style lang="scss">
+@use "$/styles/theme" as *;
+
+main {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+aside {
+    position: relative;
+    margin-top: 1rem;
+    padding: 1rem;
+    flex-shrink: 0;
+    width: 20rem;
+    border-style: solid;
+    border-color: $muted-color;
+    border-width: 2px;
+    border-radius: 0.6rem;
+    height: fit-content;
+    background: url("/laden-donkey-ink.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: rgba(255, 255, 255, 0.85);
+    background-blend-mode: screen;
+    transform: scaleX(-1);  // Flips background image and contents
+
+    // Returns contents back to normal but leaves background image reversed
+    & > * {
+        transform: scaleX(-1);
+    }
+
+    h1 {
+        font-family: $heading-font;
+        font-size: 1.1rem;
+        font-weight: 400;
+        font-style: italic;
+        margin-bottom: 0.4em;
+    }
+
+    p {
+        font-size: 1.1rem;
+        margin-bottom: 1em;
+        font-weight: 300;
+    }
+}
+
+article {
+    flex-grow: 1;
+    min-width: 0;   // Don't fully understand why but this is necessary to stop the width from growing too wide
+}
+</style>

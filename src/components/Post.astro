@@ -1,0 +1,94 @@
+---
+import { render } from "astro:content"
+import { titleCase } from "title-case"
+
+const { post } = Astro.props
+
+const { Content } = await render(post)
+---
+
+<h1>{titleCase(post.data.title)}</h1>
+
+<div class="markdown">
+    <Content />
+</div>
+
+<style lang="scss">
+@use "$/styles/theme" as *;
+
+h1 {
+    font-family: $heading-font;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 1em;
+}
+
+pre {
+    overflow-x: auto;
+}
+</style>
+
+<style lang="scss" is:global>
+@use "$/styles/theme" as *;
+
+// Styling for content from the markdown file
+div.markdown {
+    flex-shrink: 1;
+
+    pre.astro-code {
+        font-size: 1.2rem;
+        margin-bottom: 1.2em;
+        background-color: adjust-color($muted-color, $lightness: 14%, $saturation: -50%) !important;
+        padding: 0.5em;
+        border-radius: 0.5em;
+        border-style: solid;
+        border-width: 1px;
+        border-color: $muted-color;
+        overflow-x: auto;
+
+        span.line {
+            display: inline-block;
+            line-height: 1.3em; // Removes space between lines - unclear why this is needed
+        }
+
+        span.highlighted {
+            border: 1px solid blue;
+        }
+
+        span.add {
+            background-color: rgba(10, 220, 10, 0.2);
+        }
+
+        span.diff.remove {
+            background-color: rgba(220, 10, 10, 0.2);
+        }
+    }
+
+    h3 {
+        font-family: $code-font;
+        font-weight: 200;
+        font-size: 0.8rem;
+        margin-left: 0.8em;
+        margin-bottom: 0.4em;
+    }
+
+    p {
+        font-size: 1.2rem;
+        margin-bottom: 1em;
+        text-align: justify;
+    }
+
+    code {
+        font-family: $code-font;
+        font-weight: 400;
+        background-color: adjust-color($muted-color, $lightness: 14%, $saturation: -50%);
+    }
+
+    // Inline code blocks
+    :not(pre.astro-code) code {
+        font-style: italic;
+        padding-inline: 0.2em;
+        border-radius: 0.4em;
+    }
+}
+</style>

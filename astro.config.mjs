@@ -1,5 +1,23 @@
-// @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config"
+import {
+    transformerMetaHighlight,
+    transformerNotationDiff,
+    transformerNotationHighlight,
+    transformerNotationFocus
+ } from "@shikijs/transformers"
 
-// https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+    publicDir: "./src/static",
+    markdown: {
+        syntaxHighlight: "shiki",
+        shikiConfig: {
+            theme: "catppuccin-latte",
+            transformers: [
+                transformerMetaHighlight(),
+                transformerNotationDiff(),
+                transformerNotationHighlight(),
+                transformerNotationFocus()
+            ]
+        }
+    }
+})
