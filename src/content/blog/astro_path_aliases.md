@@ -1,8 +1,7 @@
 ---
 title: Creating path aliases in Astro
 tags: [astro, js]
-created: 2025-02-06
-updated:
+published: 2025-02-06
 ---
 
 Path aliases are used as a shorthand when importing files within Astro components. Typically, files are imported either

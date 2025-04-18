@@ -1,5 +1,7 @@
 ---
 import "/src/styles/main.scss"
+import { Image } from "astro:assets"
+import logo from "$/static/laden-donkey.png"
 ---
 
 <!doctype html>
@@ -18,7 +20,7 @@ import "/src/styles/main.scss"
 <body>
     <header>
         <a href="/" class="header">
-            <img src="/laden-donkey.png" alt="A heavily laden donkey">
+            <Image src={logo} alt="Cartoon image of a heavily ladened donkey" class="logo"/>
             <h1>Laden Donkey</h1>
         </a>
 
@@ -54,8 +56,9 @@ header {
         text-decoration: none;
     }
 
-    img {
+    .logo {
         height: 5rem;
+        width: 5rem;
         border-radius: 0.8em;
     }
 

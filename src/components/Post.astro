@@ -30,6 +30,7 @@ pre {
 
 <style lang="scss" is:global>
 @use "$/styles/theme" as *;
+@use "sass:color";
 
 // Styling for content from the markdown file
 div.markdown {
@@ -38,7 +39,7 @@ div.markdown {
     pre.astro-code {
         font-size: 1.2rem;
         margin-bottom: 1.2em;
-        background-color: adjust-color($muted-color, $lightness: 14%, $saturation: -50%) !important;
+        background-color: color.adjust($muted-color, $lightness: 14%, $saturation: -50%) !important;
         padding: 0.5em;
         border-radius: 0.5em;
         border-style: solid;
@@ -81,7 +82,7 @@ div.markdown {
     code {
         font-family: $code-font;
         font-weight: 400;
-        background-color: adjust-color($muted-color, $lightness: 14%, $saturation: -50%);
+        background-color: color.adjust($muted-color, $lightness: 14%, $saturation: -50%);
     }
 
     // Inline code blocks

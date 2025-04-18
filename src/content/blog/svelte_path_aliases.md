@@ -1,8 +1,7 @@
 ---
 title: Creating path aliases in SvelteKit
 tags: [svelte, js]
-created: 2025-02-07
-updated:
+published: 2025-02-07
 ---
 
 Path aliases are used as a shorthand when importing files within Svelte components. Typically, files are imported either

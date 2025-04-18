@@ -2,6 +2,8 @@
 import Layout from "$/layouts/Main.astro"
 import Post from "$/components/Post.astro"
 
+import { titleCase } from "title-case"
+
 import { getCollection, render } from "astro:content"
 
 // Get a sorted list of blog posts
@@ -23,10 +25,12 @@ const posts = (await getCollection("blog", ({ data }) => {
 <Layout>
 
     <main>
-        <!-- Show the most recent post -->
-        <article>
-            <Post post={posts[0]} />
-        </article>
+        <!-- List all posts -->
+        <ul>
+            { posts.map((post) => (
+                <li><a href={`/blog/${post.id}`}>{titleCase(post.data.title)}</a></li>
+            ))}
+        </ul>
 
         <aside>
             <div class="section">
@@ -58,7 +62,7 @@ aside {
     border-width: 2px;
     border-radius: 0.6rem;
     height: fit-content;
-    background-image: url("/laden-donkey-ink.jpg");
+    background: url("/laden-donkey-ink.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: right;
@@ -86,8 +90,15 @@ aside {
     }
 }
 
-article {
+ul {
     flex-grow: 1;
     min-width: 0;
+    list-style-type: none;
+    font-size: 1.1rem;
+    font-weight: 400;
+
+    li {
+        margin-bottom: 1.5em;
+    }
 }
 </style>

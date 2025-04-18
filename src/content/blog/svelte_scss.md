@@ -1,8 +1,7 @@
 ---
 title: Using SCSS with Svelte
 tags: [svelte, js, scss]
-created: 2025-02-06
-updated:
+published: 2025-02-06
 ---
 
 SCSS is a popular CSS extension language that can make it easier to write styles for your svelte webapp. Svelte is
