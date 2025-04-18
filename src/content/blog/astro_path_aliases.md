@@ -5,7 +5,7 @@ created: 2025-02-06
 updated:
 ---
 
-Path aliases are used as a shorthand when importing files within astro components. Typically, files are imported either
+Path aliases are used as a shorthand when importing files within Astro components. Typically, files are imported either
 using absolute (`/src/components/welcome.astro`) or relateive (`../components/welcome.astro`) paths. Relative paths can
 be hard to interpret in deeply nested directory hierachies or when moving files from one location to another. Absolute
 paths are more robust but can be verbose, especially for referencing deeply nested files.
@@ -35,7 +35,7 @@ Aliases are defined in `tsconfig.json` under `compilerOptions.paths`:
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"],
   "compilerOptions": {                                      // [!code ++]
-    "baseUrl": "/",                                        // [!code ++]
+    "baseUrl": "/",                                         // [!code ++]
     "paths": {                                              // [!code ++]
       "$/*": ["src/*"],                                     // [!code ++]
       "$controls/*": ["src/components/forms/controls/*"]    // [!code ++]
@@ -46,8 +46,7 @@ Aliases are defined in `tsconfig.json` under `compilerOptions.paths`:
 
 Note the `/*` after the alias which is required for it to function correctly. Aliases are relative to a base path so
 `compilerOptions.baseUrl` needs to be specified in order to use aliases. Multiple aliases can be specified as needed. My preference is to just use a `$` alias to refer to the `src` directory as I usually have a fairly shallow directory
-structure within that directory, but you can use whichever aliases work best for you.
+structure, but you can use whichever aliases work best for you. Once defined the aliases can be used anywhere files are imported such as js `import` statements, css `@import` directives or scss `@use` directives.
 
-Once defined the aliases can be used anywhere files are imported such as js `import` statements, css `@import`
-directives or scss `@use` directives. Path aliases can act as nice syntactic sugar to make code more concise and
-readable. They are easy to set up and use in Astro with just a few configuration lines.
+Path aliases can act as nice syntactic sugar to make code more concise and readable. They are easy to set up and use in
+Astro with just a few configuration lines.

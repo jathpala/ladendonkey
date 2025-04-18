@@ -8,7 +8,7 @@ import {
 
 export default defineConfig({
     publicDir: "./src/static",
-    site: "https://gh.ladendonkey.au",
+    site: "https://ladendonkey.au",
     markdown: {
         syntaxHighlight: "shiki",
         shikiConfig: {
